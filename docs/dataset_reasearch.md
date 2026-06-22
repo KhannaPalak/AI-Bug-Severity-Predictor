@@ -2,25 +2,30 @@
 
 ## Dataset Name
 
-JIRA Social Repository
+Apache JIRA Issues Dataset
+
+## Source
+
+Kaggle
 
 ## Goal
 
-Predict software bug severity.
+Build an AI-powered bug severity prediction system that automatically predicts the severity of software bugs using natural language processing and machine learning.
 
 ## Target Variable
 
-(To be decided after EDA)
+(To be identified during Exploratory Data Analysis)
 
-## Possible Features
+## Candidate Features
 
-- Title
-- Description
-- Component
-- Priority
-- Reporter
-- Resolution
+* Summary
+* Description
+* Issue Type
+* Priority
+* Status
+* Components
+* Resolution
 
 ## Notes
 
-(To be filled after EDA)
+This document will be updated after Exploratory Data Analysis (EDA).

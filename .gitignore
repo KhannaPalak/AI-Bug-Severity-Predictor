@@ -1,1 +1,14 @@
 desktop.ini
+# Dataset folders
+data/raw/
+data/processed/
+
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
