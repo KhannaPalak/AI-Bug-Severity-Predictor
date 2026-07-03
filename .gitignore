@@ -1,14 +1,27 @@
 desktop.ini
+
 # Dataset folders
 data/raw/
 data/processed/
 
-# Virtual environment
+# Virtual Environment
 venv/
 
-# Python cache
+# Python Cache
 __pycache__/
 *.pyc
 
 # Jupyter
 .ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Trained Models
+models/*.pkl
+models/bert_model/
+models/bert_output/
+
+# OS Files
+.DS_Store
+Thumbs.db
