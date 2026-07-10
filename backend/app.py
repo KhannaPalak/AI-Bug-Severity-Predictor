@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 
 from predict import predict_bug
+from predict_rf import predict_bug_rf
+from predict_xgb import predict_bug_xgb
 
 app = FastAPI(
     title="AI Bug Severity Predictor API",
@@ -14,13 +16,39 @@ class BugReport(BaseModel):
 
     text: str
 
+    model: str = "BERT"
+
 
 @app.post("/predict")
 def predict(data: BugReport):
 
-    severity = predict_bug(data.text)
+    try:
 
-    return {"Predicted Severity": severity}
+        if data.model == "BERT":
+
+            severity, confidence = predict_bug(data.text)
+
+        elif data.model == "Random Forest":
+
+            severity, confidence = predict_bug_rf(data.text)
+
+        elif data.model == "XGBoost":
+
+            severity, confidence = predict_bug_xgb(data.text)
+
+        else:
+
+            severity, confidence = predict_bug(data.text)
+
+        return {
+            "Predicted Severity": severity,
+            "Confidence": confidence,
+        }
+
+    except Exception as e:
+
+        print(e)
+        return {"error": str(e)}
 
 
 @app.get("/")
