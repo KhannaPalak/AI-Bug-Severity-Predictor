@@ -1,19 +1,57 @@
 import pickle
+import torch
 
-rf_model = pickle.load(open("../models/random_forest.pkl","rb"))
+from transformers import BertTokenizer
+from transformers import BertForSequenceClassification
 
-xgb_model = pickle.load(open("../models/xgboost.pkl","rb"))
+# ----------------------------
+# Load Label Encoder
+# ----------------------------
 
-tfidf = pickle.load(open("../models/tfidf_vectorizer.pkl","rb"))
+label_encoder = pickle.load(open("../models/label_encoder.pkl", "rb"))
 
-label_encoder = pickle.load(open("../models/label_encoder.pkl","rb"))
+# ----------------------------
+# Load Tokenizer
+# ----------------------------
+
+tokenizer = BertTokenizer.from_pretrained("../models/bert_model")
+
+# ----------------------------
+# Load Trained BERT
+# ----------------------------
+
+model = BertForSequenceClassification.from_pretrained("../models/bert_model")
+
+model.eval()
+
+# ----------------------------
+# Prediction Function
+# ----------------------------
+
 
 def predict_bug(text):
 
-    vector = tfidf.transform([text])
+    encoding = tokenizer(
+        text,
+        return_tensors="pt",
+        truncation=True,
+        padding=True,
+        max_length=128,
+    )
 
-    prediction = xgb_model.predict(vector)
+    with torch.no_grad():
 
-    severity = label_encoder.inverse_transform(prediction)
+        outputs = model(**encoding)
 
-    return severity[0]
+    probabilities = torch.softmax(outputs.logits, dim=1)
+
+    confidence = round(
+        probabilities.max().item() * 100,
+        2,
+    )
+
+    prediction = torch.argmax(outputs.logits, dim=1).item()
+
+    severity = label_encoder.inverse_transform([prediction])[0]
+
+    return severity, confidence
