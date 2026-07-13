@@ -499,3 +499,19 @@ Cloud Storage - fails after deployment,Cloud Storage fails after deployment,Clou
 Admin Panel - consumes excessive memory,Admin Panel consumes excessive memory,Admin Panel: The bug affects production users.
 Docker - redirects infinitely,Docker redirects infinitely,Docker: The bug affects production users.
 Admin Panel - freezes during operation,Admin Panel freezes during operation,Admin Panel: The server logs indicate an internal exception.
+Title,Summary,Description
+"Spelling Mistake on Registration Page","Minor spelling mistake in user registration form","There is a minor spelling mistake in the title of the user registration page. It says 'Regestration' instead of 'Registration'."
+"Footer Logo Pixelated","Company logo appears pixelated in email footer","The company logo in the email footer appears slightly pixelated on high-resolution screens and needs a higher resolution asset."
+"Grammar Error in Welcome Message","Welcome message has a minor grammar typo","Grammar error found in the welcome message: it says 'your' instead of 'you are' when a user signs in."
+"Login Button Mobile Layout Overlap","Login button overlaps text box on smaller screens","The login button slightly overlaps with the password text box when viewed on mobile screens, making it look cramped."
+"Dark Mode Switch Hitch","Dark mode graphic does not change state properly","The dark mode toggle switch icon stays stuck on the moon graphic even when light mode is activated, though colors change."
+"Navigation Menu Z-Index Issue","Navigation menu hides behind video element","The main navigation menu temporarily hides behind the video player element when scrolling down the homepage."
+"Dashboard Layout Misalignment","The table columns are misaligned on tablet views","The table columns on the analytics dashboard are slightly misaligned on iPad devices, causing horizontal text overflowing past the borders of the container box."
+"Missing Button Hover Effect","Profile picture upload button is missing its animation","The profile picture upload widget is missing its hover animation effect. The cursor changes but the button layout doesn't shade dynamically."
+"Critical Login Crash","Application freezes and crashes on login attempt","The application crashes unexpectedly right after entering credentials on the login screen, triggering an infinite loading loop."
+"Payment Gateway Blocked","Payment gateway completely unavailable during checkout","Users are completely unable to complete purchases. The payment checkout container times out immediately and throws a critical system failure error."
+Title,Summary,Description
+"Scenario 1: Critical Blocker","Application crashes immediately on startup","The application completely freezes and crashes unexpectedly right after launching the splash screen on iOS and Android devices."
+"Scenario 2: Major Failure","Core search functionality is completely broken","The main search bar filters return a 404 page and the form submit button is missing when trying to look up system records."
+"Scenario 3: Minor Layout Bug","Dashboard layout alignment and overlapping text","The table columns on the main dashboard layout have a severe misalignment issue where text elements are overlapping on tablet screens."
+"Scenario 4: Trivial Cosmetic","Spelling mistake and typo on login banner","There is a minor spelling mistake and typo in the welcome text header. The word receipt is misspelled on the user banner."

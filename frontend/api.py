@@ -28,7 +28,7 @@ def check_backend():
 
     try:
 
-        response = requests.get("http://127.0.0.1:8000/")
+        response = requests.get("http://backend:8000/")
 
         return response.status_code == 200
 
