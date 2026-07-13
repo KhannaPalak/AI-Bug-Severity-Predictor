@@ -1,10 +1,18 @@
 import pickle
 import numpy as np
+import os
 
-label_encoder = pickle.load(open("../models/label_encoder.pkl", "rb"))
-rf = pickle.load(open("../models/random_forest.pkl", "rb"))
-xgb = pickle.load(open("../models/xgboost.pkl", "rb"))
-vectorizer = pickle.load(open("../models/tfidf_vectorizer.pkl", "rb"))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
+
+
+label_encoder = pickle.load(open(os.path.join(MODEL_DIR, "label_encoder.pkl"), "rb"))
+
+rf = pickle.load(open(os.path.join(MODEL_DIR, "random_forest.pkl"), "rb"))
+
+xgb = pickle.load(open(os.path.join(MODEL_DIR, "xgboost.pkl"), "rb"))
+
+vectorizer = pickle.load(open(os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl"), "rb"))
 
 samples = [
     "Application crashes immediately after startup.",
