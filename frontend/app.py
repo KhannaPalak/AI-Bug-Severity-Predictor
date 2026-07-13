@@ -39,7 +39,7 @@ with st.sidebar:
 
     with c2:
 
-        st.image("assets/logo.png", width=180)
+        st.image("assets/Logo.png", width=180)
 
     # Title
     st.markdown(

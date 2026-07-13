@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Ahana%20Arora/OneDrive/Pictures/Documents/AI-Bug-Severity-Predictor/mlruns/0/7cf89548137e443a90e37846b52fd411/artifacts
+end_time: 1783958314458
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7cf89548137e443a90e37846b52fd411
+run_name: Random Forest
+run_uuid: 7cf89548137e443a90e37846b52fd411
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1783958309717
+status: 3
+tags: []
+user_id: Ahana Arora

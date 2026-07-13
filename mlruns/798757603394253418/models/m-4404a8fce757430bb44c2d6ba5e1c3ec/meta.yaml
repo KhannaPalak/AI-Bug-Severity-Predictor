@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/Ahana%20Arora/OneDrive/Pictures/Documents/AI-Bug-Severity-Predictor/mlruns/798757603394253418/models/m-4404a8fce757430bb44c2d6ba5e1c3ec/artifacts
+creation_timestamp: 1783796139704
+experiment_id: '798757603394253418'
+last_updated_timestamp: 1783796151554
+model_id: m-4404a8fce757430bb44c2d6ba5e1c3ec
+model_type: null
+name: random_forest_model
+source_run_id: cdbd9517295241b7891e59ba43ad07fd
+status: 2
+status_message: null
