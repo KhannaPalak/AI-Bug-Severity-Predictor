@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware  # <-- ADD THIS IMPORT
 
 from predict import predict_bug
 from predict_rf import predict_bug_rf
@@ -9,6 +10,22 @@ app = FastAPI(
     description="Predicts the severity level of software bug reports using Machine Learning.",
     version="1.0.0",
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins (local and deployed)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+# ----------------------------------------------
+
+
+class BugReport(BaseModel):
+    text: str
+    model: str = "BERT"
+
+
 from pydantic import BaseModel
 
 
