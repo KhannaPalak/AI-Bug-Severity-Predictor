@@ -2,9 +2,9 @@ import pickle
 import numpy as np
 
 # Load models
-rf_model = pickle.load(open("models/random_forest.pkl", "rb"))
-vectorizer = pickle.load(open("models/tfidf_vectorizer.pkl", "rb"))
-label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
+rf_model = pickle.load(open("../models/random_forest.pkl", "rb"))
+vectorizer = pickle.load(open("../models/tfidf_vectorizer.pkl", "rb"))
+label_encoder = pickle.load(open("../models/label_encoder.pkl", "rb"))
 
 
 def predict_bug_rf(text):
