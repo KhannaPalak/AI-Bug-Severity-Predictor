@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  # <-- ADD THIS IMPORT
 
@@ -23,16 +25,6 @@ app.add_middleware(
 
 class BugReport(BaseModel):
     text: str
-    model: str = "BERT"
-
-
-from pydantic import BaseModel
-
-
-class BugReport(BaseModel):
-
-    text: str
-
     model: str = "BERT"
 
 
