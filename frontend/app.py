@@ -5,7 +5,13 @@ import time
 from utils import show_severity, get_recommendation
 import streamlit as st
 
-sample_df = pd.read_csv("data/sample_bugs.csv")
+import os  # Make sure import os is at the top of your file!
+
+# This dynamically calculates the exact path to your frontend folder
+current_dir = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(current_dir, "data", "sample_bugs.csv")
+
+sample_df = pd.read_csv(csv_path)
 
 # ---------------------------------------
 # Page Configuration
@@ -20,11 +26,12 @@ if "history" not in st.session_state:
 
 
 def load_css():
-    with open("styles/custom.css") as f:
-        st.markdown(
-            f"<style>{f.read()}</style>",
-            unsafe_allow_html=True,
-        )
+    # Dynamically find the absolute path to styles/custom.css
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    css_path = os.path.join(current_dir, "styles", "custom.css")
+
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 load_css()
