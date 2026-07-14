@@ -4,9 +4,9 @@ import numpy as np
 from transformers import BertTokenizer, BertForSequenceClassification
 
 # Load Label Encoder and BERT
-label_encoder = pickle.load(open("../models/label_encoder.pkl", "rb"))
-tokenizer = BertTokenizer.from_pretrained("../models/bert_model")
-model = BertForSequenceClassification.from_pretrained("../models/bert_model")
+label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
+tokenizer = BertTokenizer.from_pretrained("models/bert_model")
+model = BertForSequenceClassification.from_pretrained("models/bert_model")
 model.eval()
 
 
