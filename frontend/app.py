@@ -46,7 +46,11 @@ with st.sidebar:
 
     with c2:
 
-        st.image("assets/Logo.png", width=180)
+        # Dynamically find the absolute path to assets/Logo.png
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        logo_path = os.path.join(current_dir, "assets", "Logo.png")
+
+        st.image(logo_path, width=180)
 
     # Title
     st.markdown(
