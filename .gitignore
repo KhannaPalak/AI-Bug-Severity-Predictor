@@ -36,14 +36,9 @@ mlruns/
 mlflow.db
 
 # -----------------------------
-# Large Model Files
-# -----------------------------
-*.safetensors
-
-# -----------------------------
 # BERT Output
 # -----------------------------
-models/bert_model/
+
 models/bert_output/
 
 # -----------------------------
