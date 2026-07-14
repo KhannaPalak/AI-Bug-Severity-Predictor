@@ -6,7 +6,7 @@ from transformers import BertTokenizer, BertForSequenceClassification
 # Load Label Encoder and BERT
 label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-model = BertForSequenceClassification.from_pretrained("models/bert_model")
+model = BertForSequenceClassification.from_pretrained("bert-base-uncased")
 model.eval()
 
 
