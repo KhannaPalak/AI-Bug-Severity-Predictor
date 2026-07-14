@@ -1,0 +1,20 @@
+services:
+  # 1. FastAPI Backend Service
+  - type: web
+    name: bug-backend-service
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    context: .
+    plan: free
+    envVars:
+      - key: MLFLOW_ALLOW_FILE_STORE
+        value: "true"
+
+  # 2. Streamlit Frontend Service
+  - type: web
+    name: bug-frontend-service
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    context: .
+    plan: free
+    port: 8501
