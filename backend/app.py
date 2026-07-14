@@ -71,3 +71,8 @@ def predict(data: BugReport):
 @app.get("/")
 def home():
     return {"message": "AI Bug Severity Predictor API is running successfully!"}
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy", "message": "Backend is running"}
