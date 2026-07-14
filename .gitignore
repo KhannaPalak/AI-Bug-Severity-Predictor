@@ -25,3 +25,17 @@ models/bert_output/
 # OS Files
 .DS_Store
 Thumbs.db
+
+# MLflow
+mlruns/
+**/mlruns/
+
+# BERT output
+models/bert_output/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
