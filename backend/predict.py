@@ -8,7 +8,7 @@ label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
 from transformers import AutoTokenizer
 from transformers import AutoModelForSequenceClassification
 
-MODEL_NAME = "Ahana0316/bug-severity-bert"
+MODEL_NAME = "Ahana0316/Bug_Severity_Predictor"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
