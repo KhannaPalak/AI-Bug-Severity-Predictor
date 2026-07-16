@@ -5,8 +5,14 @@ from transformers import BertTokenizer, BertForSequenceClassification
 
 # Load Label Encoder and BERT
 label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
-tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-model = BertForSequenceClassification.from_pretrained("bert-base-uncased")
+from transformers import AutoTokenizer
+from transformers import AutoModelForSequenceClassification
+
+MODEL_NAME = "Ahana0316/bug-severity-bert"
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
 model.eval()
 
 
