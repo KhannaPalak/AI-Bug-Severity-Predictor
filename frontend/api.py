@@ -27,11 +27,11 @@ def predict_severity(text, model="BERT"):
 def check_backend():
 
     try:
+        BACKEND_URL = "https://bug-backend-service.onrender.com"
 
-        response = requests.get("http://backend:8000/")
+        response = requests.get(BACKEND_URL, timeout=5)
 
         return response.status_code == 200
 
-    except:
-
+    except Exception:
         return False
