@@ -1,10 +1,17 @@
 import pickle
 import torch
 import numpy as np
-from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # Load Label Encoder and BERT
-label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+label_encoder = pickle.load(
+    open(os.path.join(BASE_DIR, "models", "label_encoder.pkl"), "rb")
+)
+
 from transformers import AutoTokenizer
 from transformers import AutoModelForSequenceClassification
 

@@ -2,7 +2,14 @@ import pickle
 import numpy as np
 
 # Load models
-xgb_model = pickle.load(open("models/xgboost.pkl", "rb"))
+import os
+import pickle
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+XGB_PATH = os.path.join(BASE_DIR, "models", "xgb_model.pkl")
+
+xgb_model = pickle.load(open(XGB_PATH, "rb"))
 vectorizer = pickle.load(open("models/tfidf_vectorizer.pkl", "rb"))
 label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
 

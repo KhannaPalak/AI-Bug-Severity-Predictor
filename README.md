@@ -1,4 +1,16 @@
 # BugSight AI
+---
+title: BugSight AI
+emoji: 🐛
+colorFrom: red
+colorTo: blue
+sdk: streamlit
+sdk_version: 1.35.0
+app_file: frontend/app.py
+pinned: false
+---
+
+# BugSight AI
 
 AI-Powered Bug Severity Prediction and Automated Triage Platform
 

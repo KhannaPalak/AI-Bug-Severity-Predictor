@@ -1,10 +1,17 @@
 import pickle
 import numpy as np
+import os
 
-# Load models
-rf_model = pickle.load(open("models/random_forest.pkl", "rb"))
-vectorizer = pickle.load(open("models/tfidf_vectorizer.pkl", "rb"))
-label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BASE_DIR)
+MODELS_DIR = os.path.join(PROJECT_ROOT, "models")
+
+
+rf_model = pickle.load(open(os.path.join(MODELS_DIR, "random_forest.pkl"), "rb"))
+
+vectorizer = pickle.load(open(os.path.join(MODELS_DIR, "tfidf_vectorizer.pkl"), "rb"))
+
+label_encoder = pickle.load(open(os.path.join(MODELS_DIR, "label_encoder.pkl"), "rb"))
 
 
 def predict_bug_rf(text):

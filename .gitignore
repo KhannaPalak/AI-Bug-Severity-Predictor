@@ -47,3 +47,5 @@ models/bert_output/
 #
 # models/*.pkl
 # -----------------------------
+ml/notebooks/test_dataset/
+ml/notebooks/train_dataset/
