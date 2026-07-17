@@ -1,3 +1,11 @@
 streamlit
 pandas
+torch
+transformers
+scikit-learn
+numpy
+joblib
+sentencepiece
+safetensors
+huggingface_hub
 requests
