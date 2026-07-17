@@ -49,3 +49,11 @@ models/bert_output/
 # -----------------------------
 ml/notebooks/test_dataset/
 ml/notebooks/train_dataset/
+
+ml/notebooks/mlflow.db
+
+ml/notebooks/mlflow.db
+
+ml/notebooks/mlflow.db
+
+ml/notebooks/mlflow.db
