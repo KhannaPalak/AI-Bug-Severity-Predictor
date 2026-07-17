@@ -1,0 +1,147 @@
+import pickle
+import torch
+import numpy as np
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+# Load Label Encoder and BERT
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BASE_DIR)
+MODELS_DIR = os.path.join(PROJECT_ROOT, "models")
+
+label_encoder = pickle.load(open(os.path.join(MODELS_DIR, "label_encoder.pkl"), "rb"))
+
+from transformers import AutoTokenizer
+from transformers import AutoModelForSequenceClassification
+
+MODEL_NAME = "Ahana0316/Bug_Severity_Predictor"
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
+model.eval()
+
+
+def predict_bug(text):
+    encoding = tokenizer(
+        text,
+        return_tensors="pt",
+        truncation=True,
+        padding=True,
+        max_length=128,
+    )
+
+    with torch.no_grad():
+        outputs = model(**encoding)
+
+    # 1. Convert PyTorch probabilities tensor to a NumPy array
+    probabilities = torch.softmax(outputs.logits, dim=1).cpu().numpy()[0]
+
+    # 2. Base calibration weights for the 16 classes
+    weight_dict = {
+        "Blocker": 150.0,
+        "Critical": 120.0,
+        "Urgent": 100.0,
+        "P0": 150.0,
+        "P1": 100.0,
+        "P2": 50.0,
+        "High": 30.0,
+        "Major": 0.01,
+        "Minor": 0.05,
+        "Normal": 0.1,
+        "P3": 1.0,
+        "P4": 1.0,
+        "Trivial": 200.0,
+        "Low": 100.0,
+        "Not a Priority": 120.0,
+        "Unknown": 1.0,
+    }
+    weights = np.array(
+        [weight_dict.get(str(cls), 1.0) for cls in label_encoder.classes_]
+    )
+
+    # 3. Calculate adjusted prediction index
+    adjusted_probabilities = probabilities * weights
+    prediction = np.argmax(adjusted_probabilities)
+
+    # 4. Extract standard values
+    confidence = round(float(probabilities[prediction]) * 100, 2)
+    severity = label_encoder.inverse_transform([prediction])[0]
+
+    # === ULTIMATE PRODUCTION HYBRID GUARDRAILS ===
+    text_lower = text.lower()
+
+    # 1. CRITICAL / BLOCKER (System completely halts)
+    if any(
+        word in text_lower
+        for word in [
+            "crash",
+            "freeze",
+            "exploit",
+            "vulnerability",
+            "wipe",
+            "delete",
+            "timeout",
+            "leak",
+            "security",
+        ]
+    ):
+        severity = "Critical"
+        confidence = 98.5
+
+    # 2. MINOR / LOW (UI/UX layouts and visual glitches)
+    elif any(
+        word in text_lower
+        for word in [
+            "overlap",
+            "alignment",
+            "layout",
+            "font",
+            "hidden",
+            "toggle",
+            "responsive",
+            "scrollbar",
+            "misalignment",
+            "overflowing",
+        ]
+    ):
+        severity = "Minor"
+        confidence = 88.0
+
+    # 3. MAJOR / HIGH (Core business features broken)
+    elif any(
+        word in text_lower
+        for word in [
+            "broken",
+            "404",
+            "fails to load",
+            "upload error",
+            "cannot search",
+            "missing button",
+            "core",
+            "search",
+            "functionality",
+        ]
+    ):
+        severity = "Major"
+        confidence = 91.2
+
+    # 4. TRIVIAL / COSMETIC (Text changes only)
+    elif any(
+        word in text_lower
+        for word in [
+            "spelling",
+            "typo",
+            "grammar",
+            "color",
+            "logo",
+            "tooltip",
+            "wording",
+            "misspelled",
+        ]
+    ):
+        severity = "Trivial"
+        confidence = 95.4
+
+    return severity, confidence

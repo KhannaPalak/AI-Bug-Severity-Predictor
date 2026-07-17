@@ -1,37 +1,35 @@
-import requests
-
-from config import API_URL
+from predict import predict_bug
+from predict_rf import predict_rf
+from predict_xgb import predict_xgb
 
 
 def predict_severity(text, model="BERT"):
-
-    payload = {
-        "text": text,
-        "model": model,
-    }
-
     try:
+        if model == "BERT":
+            severity, confidence = predict_bug(text)
 
-        response = requests.post(API_URL, json=payload)
+        elif model == "Random Forest":
+            severity, confidence = predict_rf(text)
 
-        if response.status_code != 200:
-            return {"error": response.text}
+        elif model == "XGBoost":
+            severity, confidence = predict_xgb(text)
 
-        return response.json()
+        else:
+            return {"error": "Invalid model selected."}
+
+        return {
+            "Predicted Severity": severity,
+            "Confidence": confidence,
+        }
 
     except Exception as e:
-
         return {"error": str(e)}
 
 
 def check_backend():
-
     try:
-        BACKEND_URL = "https://bug-backend-service.onrender.com"
-
-        response = requests.get(BACKEND_URL, timeout=5)
-
-        return response.status_code == 200
-
+        # Check if the local BERT model loads correctly
+        predict_bug("Test bug report")
+        return True
     except Exception:
         return False

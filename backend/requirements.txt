@@ -7,3 +7,8 @@ xgboost
 numpy
 joblib
 pydantic
+streamlit
+pandas
+sentencepiece
+safetensors
+huggingface_hub
