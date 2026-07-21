@@ -1,0 +1,107 @@
+{
+  "title": "BugSight AI — Prediction Metrics",
+  "uid": "bugsight-predictions",
+  "tags": ["bugsight"],
+  "schemaVersion": 39,
+  "version": 1,
+  "timezone": "browser",
+  "panels": [
+    {
+      "title": "Prediction Requests / sec",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(http_request_duration_seconds_count{route=\"/predict\"}[1m])",
+          "legendFormat": "predictions"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "min": 0,
+          "color": { "mode": "palette-classic" }
+        }
+      }
+    },
+    {
+      "title": "Prediction Latency (p50 / p95 / p99)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 0 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{route=\"/predict\"}[1m])) by (le))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{route=\"/predict\"}[1m])) by (le))",
+          "legendFormat": "p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{route=\"/predict\"}[1m])) by (le))",
+          "legendFormat": "p99"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "min": 0,
+          "color": { "mode": "palette-classic" }
+        }
+      }
+    },
+    {
+      "title": "Error Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(rate(http_request_duration_seconds_count{route=\"/predict\",status=~\"5..\"}[1m])) / sum(rate(http_request_duration_seconds_count{route=\"/predict\"}[1m])) * 100",
+          "legendFormat": "error %"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "color": { "mode": "palette-classic" }
+        }
+      }
+    },
+    {
+      "title": "Health Check Status",
+      "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "http_request_duration_seconds_count{route=\"/health\"}",
+          "legendFormat": "health checks"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "green" },
+          "unit": "none"
+        }
+      }
+    },
+    {
+      "title": "Total Predictions",
+      "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 4, "y": 8 },
+      "targets": [
+        {
+          "expr": "http_request_duration_seconds_count{route=\"/predict\"}",
+          "legendFormat": "total"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "blue" },
+          "unit": "none"
+        }
+      }
+    }
+  ]
+}
