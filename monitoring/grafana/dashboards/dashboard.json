@@ -12,7 +12,7 @@
       "gridPos": { "h": 8, "w": 8, "x": 0, "y": 0 },
       "targets": [
         {
-          "expr": "rate(http_request_duration_seconds_count{route=\"/predict\"}[1m])",
+          "expr": "rate(http_request_duration_seconds_count{handler=\"/predict\"}[1m])",
           "legendFormat": "predictions"
         }
       ],
@@ -30,15 +30,15 @@
       "gridPos": { "h": 8, "w": 8, "x": 8, "y": 0 },
       "targets": [
         {
-          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{route=\"/predict\"}[1m])) by (le))",
+          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{handler=\"/predict\"}[1m])) by (le))",
           "legendFormat": "p50"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{route=\"/predict\"}[1m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{handler=\"/predict\"}[1m])) by (le))",
           "legendFormat": "p95"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{route=\"/predict\"}[1m])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{handler=\"/predict\"}[1m])) by (le))",
           "legendFormat": "p99"
         }
       ],
@@ -56,7 +56,7 @@
       "gridPos": { "h": 8, "w": 8, "x": 16, "y": 0 },
       "targets": [
         {
-          "expr": "sum(rate(http_request_duration_seconds_count{route=\"/predict\",status=~\"5..\"}[1m])) / sum(rate(http_request_duration_seconds_count{route=\"/predict\"}[1m])) * 100",
+          "expr": "sum(rate(http_request_duration_seconds_count{handler=\"/predict\",status=~\"5..\"}[1m])) / sum(rate(http_request_duration_seconds_count{handler=\"/predict\"}[1m])) * 100",
           "legendFormat": "error %"
         }
       ],
@@ -75,7 +75,7 @@
       "gridPos": { "h": 6, "w": 4, "x": 0, "y": 8 },
       "targets": [
         {
-          "expr": "http_request_duration_seconds_count{route=\"/health\"}",
+          "expr": "http_request_duration_seconds_count{handler=\"/health\"}",
           "legendFormat": "health checks"
         }
       ],
@@ -92,7 +92,7 @@
       "gridPos": { "h": 6, "w": 4, "x": 4, "y": 8 },
       "targets": [
         {
-          "expr": "http_request_duration_seconds_count{route=\"/predict\"}",
+          "expr": "http_request_duration_seconds_count{handler=\"/predict\"}",
           "legendFormat": "total"
         }
       ],
