@@ -48,5 +48,8 @@ models/bert_output/
 # models/*.pkl
 # -----------------------------
 
+# Environment
+.env
+
 # CommandCode
 .commandcode/
