@@ -7,3 +7,4 @@ pydantic
 pandas
 safetensors
 huggingface_hub
+prometheus-fastapi-instrumentator
