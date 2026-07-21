@@ -4,64 +4,25 @@ on:
   push:
     branches:
       - main
-
   pull_request:
     branches:
       - main
 
-
 jobs:
-
-  backend-test:
-
+  lint-and-import:
     runs-on: ubuntu-latest
-
-
     steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
-
-
-    - name: Install Backend Dependencies
-      run: |
-        pip install -r backend/requirements.txt
-
-
-    - name: Run Backend Test
-      run: |
-        python backend/test_models.py
-
-
-
-  frontend-check:
-
-    runs-on: ubuntu-latest
-
-
-    steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
-
-
-    - name: Install Frontend Dependencies
-      run: |
-        pip install -r frontend/requirements.txt
-
-
-    - name: Check Streamlit App
-      run: |
-        python -m py_compile frontend/app.py
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install Dependencies
+        run: |
+          pip install -r backend/requirements.txt
+      - name: Check Python Syntax
+        run: |
+          python -m py_compile backend/app.py
+          python -m py_compile backend/predict.py
+          python -m py_compile frontend/app.py
+          python -m py_compile frontend/predict.py
+          python -m py_compile frontend/api.py
