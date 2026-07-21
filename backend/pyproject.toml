@@ -1,0 +1,21 @@
+[project]
+name = "bugsight-backend"
+version = "1.0.0"
+description = "BugSight AI - Backend API"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "torch>=2.4.0",
+    "transformers>=4.44.0",
+    "scikit-learn>=1.5.0",
+    "numpy>=1.26.0",
+    "pydantic>=2.0",
+    "pandas>=2.2.0",
+    "safetensors>=0.4.0",
+    "huggingface-hub>=0.24.0",
+    "prometheus-fastapi-instrumentator>=7.0.0",
+]
+
+[dependency-groups]
+dev = []
