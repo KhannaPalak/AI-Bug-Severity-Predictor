@@ -78,7 +78,7 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_INSTALL_PLUGINS=
     ports:
-      - "3000:3000"
+      - "5590:3000"
     depends_on:
       - prometheus
     healthcheck:
